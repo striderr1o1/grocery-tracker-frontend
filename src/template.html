@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <!-- <link rel="stylesheet" href="styles/style.css"> -->
+    <title>Grocery Tracker Tool</title>
+    
 </head>
 <body>
-    
+    <nav class="navbar">
+        <button class="menu-button">☰</button>
+        <div class="navbar-content">
+            <div class="navbar-title">Grocery Tracker Tool</div>
+            <div class="navbar-subtitle">track your grocery with ease</div>
+        </div>
+        <button class="clear-button" id="clearButton" title="Clear output">
+            <span>🔄</span>
+        </button>
+    </nav>
+
+    <div class="chat-container">
+        <div class="messages-area" id="messagesArea">
+            <!-- Output will be displayed here -->
+        </div>
+
+        <div class="input-area">
+            <input type="file" id="imageInput" accept="image/*" hidden>
+            <button class="attach-button" id="attachButton">
+                <span>📎</span>
+            </button>
+            <div class="image-preview" id="imagePreview"></div>
+            <button class="send-button" id="sendButton">
+                <span>Send</span>
+            </button>
+        </div>
+    </div>
 </body>
 </html>
