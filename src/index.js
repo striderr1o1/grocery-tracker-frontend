@@ -50,16 +50,42 @@ function removeImage() {
 // Handle send button
 sendButton.addEventListener('click', () => {
     if (selectedImage) {
+        const imageToSend = selectedImage; // Save reference before removing
         addMessage('user', selectedImage);
         removeImage();
         
         // Simulate bot response
         setTimeout(() => {
             addMessage('bot', 'Image received! Processing your grocery receipt...');
+            let formData = new FormData();
+            formData.append("file", imageToSend); // Changed from "image" to "file"
+            let request = {
+                method: "POST",
+                body: formData
+            }
+            fetch("http://127.0.0.1:8000/uploadfile", request)
+            .then(async (response)=>{
+                let responseJson = await response.json();
+                return responseJson;
+            })
+            .then((json)=>{
+                console.log(json);
+                createOutputResponse(json.message);
+            })
+            .catch((error)=>{
+                console.log("Error caught: " + error);
+            })
         }, 500);
     }
 });
 
+function createOutputResponse(message){
+    let div = document.createElement('div');
+    div.className = "message bot";
+    let parent = document.querySelector('.messages-area');
+    div.textContent = message;
+    parent.appendChild(div);
+}
 // Handle clear button
 clearButton.addEventListener('click', () => {
     messagesArea.innerHTML = '<!-- Output will be displayed here -->';
